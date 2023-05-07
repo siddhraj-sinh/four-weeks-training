@@ -4,7 +4,9 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            string city = "Vadodara, India";
+            // Call the method to fetch weather data
+            // Display the weather data with city name
         }
 
         // Call OpenWeatherMap API to fetch weather data https://openweathermap.org/api
