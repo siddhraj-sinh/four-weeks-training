@@ -223,7 +223,7 @@
                 visited[i] = false;
             }
 
-            distances[source] = int.MinValue;
+            distances[source] = 0;
 
             for (int count = 0; count < vertices - 1; count++)
             {
@@ -252,7 +252,7 @@
 
             for (int v = 0; v < vertices; v++)
             {
-                if (!visited[v] && distances[v] <= minDistance)
+                if (!visited[v] && distances[v] < minDistance)
                 {
                     minDistance = distances[v];
                     minIndex = v;
