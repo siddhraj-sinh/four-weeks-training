@@ -27,7 +27,7 @@
             RunTestcase3();
             RunTestcase4();
             RunTestcase5();
-
+            Console.ReadLine();
         }
 
         private static void RunTestcase1()
