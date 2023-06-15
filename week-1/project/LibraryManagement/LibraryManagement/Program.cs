@@ -1,14 +1,16 @@
-﻿namespace LibraryManagement
+﻿using System.Xml.Linq;
+
+namespace LibraryManagement
 {
     internal class Program
     {
+        // Initialize collections for books, authors, and borrowers
+        static List<Book> books = new List<Book>();
+        static List<Author> authors = new List<Author>();
+        static List<Borrower> borrowers = new List<Borrower>();
         static void Main(string[] args)
         {
-            // Initialize collections for books, authors, and borrowers
-            List<Book> books = new List<Book>();
-            List<Author> authors = new List<Author>();
-            List<Borrower> borrowers = new List<Borrower>();
-
+            
             // Main program loop
             while (true)
             {
@@ -22,6 +24,15 @@
                     // Add cases for each menu option
                     case 1:
                         // Add a book
+                        AddBook();
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        DeleteBook();
+                        break;
+                    case 4:
+                        ListAllBooks();
                         break;
                     // ...
                     case 16:
@@ -46,6 +57,46 @@
             Console.WriteLine("16. Filter books by status");
             Console.WriteLine("\nEnter the number corresponding to the action you'd like to perform:");
         }
+
+        static void AddBook() {
+            Console.WriteLine("Enter the book title:");
+            string title = Console.ReadLine();
+            Console.WriteLine("Enter the author's first name: ");
+            string firstName = Console.ReadLine();
+            Console.WriteLine("Enter the author's last name: ");
+            string lastName = Console.ReadLine();
+            Console.WriteLine("Ener the author's date of birth (YYY--MM-DD): ");
+            DateTime dateOfBirth = DateTime.Parse(Console.ReadLine());
+            Console.WriteLine("Enter the publication year: ");
+            int publicationYear = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Is the book available? (yes/no): ");
+            bool isAvailable = Console.ReadLine().ToLower() == "yes" ? true : false;
+
+
+            Author author = new Author { FirstName=firstName,LastName=lastName, DateOfBirth=dateOfBirth };  
+            Book book = new Book { Title=title,Author=author,PublicationYear=publicationYear,IsAvailable=isAvailable};
+            books.Add(book);
+
+        }
+
+        static void DeleteBook() {
+
+            Console.WriteLine("Write title of the book that you want to delete: ");
+            string title = Console.ReadLine();
+
+            var book = books.Find(b => b.Title == title);
+
+            if (book != null)
+            {
+                books.Remove(book);
+            }
+        }
+
+        static void ListAllBooks() {
+            foreach (Book b in books) {
+                Console.WriteLine(b.ToString());
+            }
+        }
     }
 
     // Class definitions
@@ -55,6 +106,11 @@
         public Author Author { get; set; }
         public int PublicationYear { get; set; }
         public bool IsAvailable { get; set; }
+
+        public override string ToString()
+        {
+            return $"Title: {Title}\nAuthor {Author.FirstName} {Author.LastName}\n Date of Birth: {Author.DateOfBirth}\nPublication Year: {PublicationYear}\nIsAvailable: {IsAvailable}";
+        }
     }
 
     class Author
