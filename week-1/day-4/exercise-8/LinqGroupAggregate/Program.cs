@@ -17,9 +17,27 @@
 
             // Use LINQ to perform the following operations:
             // 1. Group products by category
-            // 2. Count the number of products in each category
-            // 3. Calculate the total price of products in each category
-            // 4. Find the most expensive product in each category
+            var groupByCategory = products.GroupBy(x => x.Category).ToList();
+            foreach (var categoryGroup in groupByCategory)
+            {
+                Console.WriteLine("Category: "+categoryGroup.Key);
+
+                //foreach (var product in categoryGroup) {
+                //    Console.WriteLine("Product: "+product.Name);
+                //}
+
+                // 2. Count the number of products in each category
+                int productCount = categoryGroup.Count();
+                Console.WriteLine("Product count: "+productCount);
+                // 3. Calculate the total price of products in each category
+                decimal totalPrice = categoryGroup.Sum(x => x.Price);
+                Console.WriteLine("Total price: "+totalPrice);
+                // 4. Find the most expensive product in each category
+                decimal expensiveProduct = categoryGroup.Max(x => x.Price);
+                Console.WriteLine("Most Expensive Product: " + expensiveProduct);
+            }
+
+            Console.ReadLine();
         }
     }
 }
