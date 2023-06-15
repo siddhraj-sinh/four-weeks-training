@@ -37,6 +37,7 @@ namespace LibraryManagement
                     // ...
                     case 16:
                         // Filter books by status
+                        FilterBookByStatus();
                         break;
                     default:
                         Console.WriteLine("Invalid option. Please try again.");
@@ -78,7 +79,19 @@ namespace LibraryManagement
             books.Add(book);
 
         }
+        static void UpdateBook() {
 
+            Console.WriteLine("Write title of the book that you want to update: ");
+            string title = Console.ReadLine();
+            var book = books.FindAll(b => b.Title == title);
+
+            if (book != null)
+            {
+
+            }
+
+
+        }
         static void DeleteBook() {
 
             Console.WriteLine("Write title of the book that you want to delete: ");
@@ -97,6 +110,18 @@ namespace LibraryManagement
                 Console.WriteLine(b.ToString());
             }
         }
+
+        static void FilterBookByStatus() {
+
+            //Console.WriteLine("Enter 1 to see available books");
+            //int input = Convert.ToInt32(Console.ReadLine());
+
+            var book = books.FindAll(b => b.IsAvailable == true);
+            foreach (Book b in book)
+            {
+                Console.WriteLine(b.ToString());
+            }
+        }
     }
 
     // Class definitions
@@ -109,7 +134,7 @@ namespace LibraryManagement
 
         public override string ToString()
         {
-            return $"Title: {Title}\nAuthor {Author.FirstName} {Author.LastName}\n Date of Birth: {Author.DateOfBirth}\nPublication Year: {PublicationYear}\nIsAvailable: {IsAvailable}";
+            return $"Title: {Title}\nAuthor {Author.FirstName} {Author.LastName}\nDate of Birth: {Author.DateOfBirth}\nPublication Year: {PublicationYear}\nIsAvailable: {IsAvailable}";
         }
     }
 
