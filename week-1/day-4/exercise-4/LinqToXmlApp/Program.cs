@@ -59,6 +59,37 @@ namespace LinqToXmlApp
 
             }
 
+            // Add a new book to the XML document
+            XElement newBook = new XElement("Book",
+                new XElement("Title", "New Book Title"),
+                new XElement("Author", "New Author"),
+                new XElement("Genre", "New Genre")
+            );
+            xDocument.Root.Add(newBook);
+            //updated XML
+            Console.WriteLine(xDocument);
+
+            //Delete book
+            XElement bookToRemove = xDocument.Descendants("Book")
+                .FirstOrDefault(book => book.Element("Title").Value == "Book Title 2");
+            bookToRemove.Remove();
+            Console.WriteLine(xDocument);
+
+            // Find the book element you want to update
+            XElement bookToUpdate = xDocument.Descendants("Book")
+                .FirstOrDefault(book => book.Element("Title").Value == "New Book Title");
+
+            // Update the book element
+            if (bookToUpdate != null)
+            {
+                bookToUpdate.Element("Title").Value = "Updated Book Title";
+                bookToUpdate.Element("Author").Value = "Updated Author";
+                bookToUpdate.Element("Genre").Value = "Updated Genre";
+            }
+
+            // Write the updated XML to the console
+            Console.WriteLine(xDocument);
+
             Console.ReadLine();
         }
     }
