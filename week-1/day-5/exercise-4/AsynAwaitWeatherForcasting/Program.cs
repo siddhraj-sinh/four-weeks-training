@@ -21,6 +21,7 @@ namespace AsynAwaitWeatherForcasting
                 var result = await FetchWeatherDataAsync(c);
                 Console.WriteLine($"Temperature in {c}: {result.Main.Temprature}");
                 Console.WriteLine($"Humidity in {c}: {result.Main.Humidity}");
+                Console.WriteLine($"Humidity in {c}: {result.weather[0].Description}");
                 Console.WriteLine();
             }
             Console.ReadLine();
@@ -47,7 +48,7 @@ namespace AsynAwaitWeatherForcasting
         {
             [JsonPropertyName("main")]
             public MainData Main { get; set; }
-
+            public Weather[] weather { get; set; }
 
             public class MainData
             {
@@ -59,7 +60,11 @@ namespace AsynAwaitWeatherForcasting
                 public int Humidity { get; set; }
             }
 
-
+            public class Weather
+            {
+                [JsonPropertyName("description")]
+                public string Description { get; set; }
+            }
         }
     }
 }
