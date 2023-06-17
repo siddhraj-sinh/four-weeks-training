@@ -79,7 +79,7 @@ namespace LibraryManagement
                         //list all borrowed books
                         ListAllBorrowedBooks();
                         break;
-                    case 16:
+                    case 15:
                         // Filter books by status
                         FilterBookByStatus();
                         break;
@@ -108,7 +108,7 @@ namespace LibraryManagement
             Console.WriteLine("12. List all borrowers");
             Console.WriteLine("13. Borrow a book");
             Console.WriteLine("14. List all borrowed books");
-            Console.WriteLine("16. Filter books by status");
+            Console.WriteLine("15. Filter books by status");
             Console.WriteLine("\nEnter the number corresponding to the action you'd like to perform:");
         }
 
@@ -235,10 +235,13 @@ namespace LibraryManagement
 
         static void FilterBookByStatus() {
 
-            //Console.WriteLine("Enter 1 to see available books");
-            //int input = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter the availability status (true/false):");
+            string userInput = Console.ReadLine();
+            bool value = userInput.ToLower() == "true" ? true : false;
 
-            var book = books.FindAll(b => b.IsAvailable == true);
+
+            var book = books.FindAll(b => b.IsAvailable == value);
+            Console.WriteLine("Filtered books: ");
             foreach (Book b in book)
             {
                 Console.WriteLine(b.ToString());
